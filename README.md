@@ -2,8 +2,12 @@
 
 Heavily inspired by the excellent Python library: https://github.com/jdepoix/youtube-transcript-api
 
-*** THIS IS PROBABLY NOT SUITABLE FOR ALL USE CASES, I THREW THIS TOGETHER IN A FEW HOURS ***
+## Installation
+```bash
+go get github.com/dougbarrett/youtube-transcript
+```
 
+## Usage
 ```go
 package main
 
@@ -26,3 +30,29 @@ func main() {
 }
 ```
 
+### Fetching Transcripts in Other Languages
+```go
+package main
+
+import (
+    "context"
+    "log"
+
+    "github.com/dougbarrett/youtube-transcript"
+)
+
+func main() {
+    videoID := "VIDEO_ID"
+    opts := []youtubetranscript.Option{
+        youtubetranscript.WithLang("TARGET_LANGUAGE"),
+    }
+    transcript, err := youtubetranscript.GetTranscriptWithOpts(context.Background(), videoID, opts...)
+
+    if err != nil {
+        panic(err)
+    }
+
+    log.Printf("%v", transcript)
+}
+
+```
